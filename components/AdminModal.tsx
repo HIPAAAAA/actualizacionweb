@@ -154,10 +154,14 @@ const AdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose, onUpdateAdded 
     const blockImageInputRef = useRef<HTMLInputElement>(null);
 
     // Refresh list when opening dashboard
+    // Refresh list when opening dashboard
     useEffect(() => {
         if (view === 'DASHBOARD') {
-            const data = getStoredUpdates();
-            setAllUpdates(data);
+            const fetchData = async () => {
+                const data = await getStoredUpdates();
+                setAllUpdates(data);
+            };
+            fetchData();
         }
     }, [view, isOpen]);
 
